@@ -1,1 +1,56 @@
-@import '../styles/global.scss';
+@import '../styles/global';
+
+.groups-header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.loading-text {
+    text-align: center;
+    padding: 2rem;
+    color: $secondary-color;
+    font-style: italic;
+}
+
+.btn-add {
+    background-color: $secondary-color;
+    color: $white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: $border-radius;
+    font-weight: bold;
+    transition: background 0.3s ease;
+
+    &:hover { 
+        background-color: darken($primary-color, 10%); 
+    }
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+    color: $white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+
+    &:hover { 
+        background-color: #c0392b; 
+    }
+}
+
+.group-name-link {
+    color: $secondary-color;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover { 
+        color: $primary-color; 
+    }
+}

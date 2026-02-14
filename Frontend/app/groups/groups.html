@@ -3,10 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="groups.scss">
-    <title>Drustvena mreza - grupe</title>
+    <link rel="stylesheet" href="../../dist/groups/groups.css" />
+    <title>Social Network - Groups</title>
   </head>
   <body>
+    <nav class="navbar">
+      <h1 class="title">Social Network</h1>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../users/users.html">Users</a></li>
+        <li><a href="groups.html">Groups</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <header class="groups-header">
+        <h2>Manage Groups</h2>
+        <button id="addGroupBtn" class="btn-add">Add New Group</button>
+      </header>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Group Name</th>
+              <th>Date Created</th>
+              <th>Members</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="groups-tbody"></tbody>
+        </table>
+        <p id="no-data-message" class="loading-text hidden">No groups found.</p>
+      </div>
+    </div>
 
     <script src="groups.js"></script>
   </body>
