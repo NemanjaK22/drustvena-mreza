@@ -120,16 +120,62 @@ body {
   background: rgb(33.1380753138, 125.1882845188, 186.8619246862);
 }
 
-h1 {
-  color: white;
+.hero {
+  background-color: #2c3e50;
+  color: #fff;
   text-align: center;
+  padding: 4rem 1rem;
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.hero .lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-button {
-  display: block;
+.features {
+  color: #333;
+  padding: 4rem 1rem;
+  max-width: 800px;
   margin: 0 auto;
 }
+.features p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: ligten(#333, 10%);
+}
+.features ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  display: inline-block;
+}
+.features ul li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
 
-p {
+.call-to-action {
+  background-color: #f4f4f4;
   text-align: center;
+  padding: 3rem 1rem;
+  border-top: 1px solid rgb(218.5, 218.5, 218.5);
+}
+.call-to-action p {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0;
+}
+.call-to-action strong {
+  display: block;
+  margin-bottom: 1rem;
 }/*# sourceMappingURL=index.css.map */

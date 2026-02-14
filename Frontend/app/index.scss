@@ -1,14 +1,68 @@
 @import './styles/global';
-h1 {
-    color: white;
+
+.hero {
+    background-color: $secondary-color;
+    color: $white;
     text-align: center;
+    padding: 4rem 1rem;
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .lead {
+        font-size: 1.25rem;
+        font-weight: 300;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
 }
 
-button {
-    display: block;
+.features {
+    // background-color: $white;
+    color: $text-color;
+    padding: 4rem 1rem;
+    max-width: 800px;
     margin: 0 auto;
+
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        color: ligten($text-color, 10%);
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+        display: inline-block;
+
+        li {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+    }
 }
 
-p{
+.call-to-action {
+    background-color: $bg-color;
     text-align: center;
+    padding: 3rem 1rem;
+    border-top: 1px solid darken($bg-color, 10%);
+
+    p {
+        font-size: 1.5rem;
+        color: $secondary-color;
+        margin: 0;
+    }
+
+    strong {
+        display: block;
+        margin-bottom: 1rem;
+    }
 }
