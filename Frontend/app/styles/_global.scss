@@ -1,0 +1,144 @@
+$primary-color: #3498db; // Glavna plava boja
+$secondary-color: #2c3e50; // Tamno siva/plava
+$text-color: #333; // Boja teksta
+$bg-color: #f4f4f4; // Svetla pozadina
+$white: #fff;
+$padding-base: 15px;
+$border-radius: 5px;
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: $bg-color;
+  color: $text-color;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $padding-base;
+}
+
+.navbar {
+  background-color: $secondary-color;
+  color: $white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    margin-left: auto;
+
+    li {
+      margin-left: 20px;
+
+      a {
+        color: $white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $primary-color; 
+        }
+      }
+    }
+  }
+}
+
+.table-container {
+  margin: 20px 0;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: $white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    th,
+    td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: $primary-color;
+      color: $white;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    tr:nth-child(even) {
+      background-color: lighten($bg-color, 2%);
+    }
+
+    tr:hover {
+      background-color: darken($white, 5%);
+    }
+  }
+}
+
+
+.form-group {
+  background: $white;
+  padding: 20px;
+  border-radius: $border-radius;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 20px auto;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: $border-radius;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+
+  button {
+    display: inline-block;
+    background: $primary-color;
+    color: $white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+    width: 100%;
+
+    &:hover {
+      background: darken($primary-color, 10%);
+    }
+  }
+}
