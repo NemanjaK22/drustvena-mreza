@@ -1,14 +1,17 @@
+const API_BASE_URL = "http://localhost:5152/api/groups";
+
+
 function initializeGroups() {
   let addBtn = document.querySelector("#addGroupBtn");
   addBtn.addEventListener("click", function () {
-    window.location.href = "./addGroup.html";
+    window.location.href = "../groupsForm/groupsForm.html";
   });
 
   getAllGroups();
 }
 
 function getAllGroups() {
-  fetch("http://localhost:17948/api/groups")
+  fetch(API_BASE_URL)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Request failed. Status: " + response.status);
@@ -75,7 +78,7 @@ function renderGroups(data) {
 
       deleteButton.addEventListener("click", function () {
         if (confirm("Da li želite da obrišete grupu: " + group.name + "?")) {
-          fetch("http://localhost:17948/api/groups/" + group.id, {
+          fetch(API_BASE_URL + "/" + group.id, {
             method: "DELETE",
           }).then((response) => {
             if (response.ok) getAllGroups();
