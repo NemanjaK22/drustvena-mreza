@@ -1,47 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Users</title>
-    <link rel="stylesheet" href="../../dist/users/users.css">
-</head>
+    <link rel="stylesheet" href="../../dist/users/users.css" />
+  </head>
 
-<body>
-
+  <body>
     <nav class="navbar">
-        <h1 class="title">Social Network</h1>
-        <ul class="nav-links">
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="users.html">Users</a></li>
-            <li><a href="../groups/groups.html">Groups</a></li>
-        </ul>
+      <h1 class="title">Social Network</h1>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="users.html">Users</a></li>
+        <li><a href="../groups/groups.html">Groups</a></li>
+      </ul>
     </nav>
 
-    <h1>Users</h1>
-    <button id="addBtn">Add new user</button>
-    <p id="no-data-message" class="hidden">No data to display.</p>
-    <div class="table-details">
+    <div class="container">
+      <div class="users-header">
+        <h2>Users</h2>
+        <button id="addBtn">Add new user</button>
+      </div>
+
+      <p id="no-data-message" class="hidden">No data to display.</p>
+
+      <div class="table-details">
         <table>
-            <thead class="hidden">
-                <tr>
-                    <th>Username</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Date of Birth</th>
-                    <th>Edit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Redovi će biti dodati ovde uz pomoć JavaScript-a -->
-            </tbody>
+          <thead class="hidden">
+            <tr>
+              <th>Username</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Date of Birth</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
         </table>
+      </div>
     </div>
 
-
     <script src="users.js"></script>
-
-</body>
-
+  </body>
 </html>

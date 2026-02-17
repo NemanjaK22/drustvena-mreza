@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage User</title>
+    <link rel="stylesheet" href="../../dist/usersForm/usersForm.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <h1 class="title">Social Network</h1>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../users/users.html">Users</a></li>
+        <li><a href="../groups/groups.html">Groups</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <h2 class="form-title">Create / Edit User</h2>
+
+      <form id="userForm" class="form-group">
+        <input type="hidden" id="userId" />
+
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter username..."
+          required
+        />
+
+        <label for="firstName">First Name:</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          placeholder="Enter first name..."
+          required
+        />
+
+        <label for="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          placeholder="Enter last name..."
+          required
+        />
+
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="date" id="dateOfBirth" name="dateOfBirth" required />
+
+        <div class="form-actions">
+          <button type="button" id="saveUserBtn" class="btn-save">
+            Save User
+          </button>
+          <button type="button" id="cancelBtn" class="btn-cancel">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script src="usersForm.js"></script>
+  </body>
+</html>

@@ -124,83 +124,47 @@ body {
   display: none;
 }
 
-.users-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.form-title {
+  text-align: center;
   margin-top: 2rem;
-  margin-bottom: 20px;
-  padding: 0 10px;
-}
-.users-header h2 {
-  margin: 0;
-  text-align: left;
-  border: none;
   color: #2c3e50;
-  text-transform: uppercase;
   font-weight: 600;
-  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
-.users-header #addBtn {
-  display: inline-block;
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+.form-actions .btn-save {
   background-color: #2c3e50;
   color: #fff;
-  padding: 10px 25px;
   border: none;
+  padding: 12px 20px;
   border-radius: 5px;
+  cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
-  cursor: pointer;
-  text-decoration: none;
   transition: background 0.3s ease;
-  margin: 0;
+  width: 100%;
 }
-.users-header #addBtn:hover {
+.form-actions .btn-save:hover {
   background-color: rgb(25.9032258065, 36.5, 47.0967741935);
 }
-
-.table-details {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.table-details table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-.table-details table thead th {
-  background-color: #2c3e50;
+.form-actions .btn-cancel {
+  background-color: #95a5a6;
   color: #fff;
-  padding: 15px 20px;
-  text-transform: uppercase;
-  text-align: left;
-}
-.table-details table tbody td {
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
-}
-.table-details table tbody tr:hover {
-  background-color: #f1f5f9;
-}
-.table-details table button {
-  padding: 8px 16px;
-  background-color: #3498db;
-  color: #fff;
+  padding: 12px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+  width: 100%;
 }
-.table-details table button:hover {
-  background-color: rgb(33.1380753138, 125.1882845188, 186.8619246862);
-}
-
-#no-data-message {
-  text-align: center;
-  font-style: italic;
-  color: #7f8c8d;
-  margin-top: 20px;
-}/*# sourceMappingURL=users.css.map */
+.form-actions .btn-cancel:hover {
+  background-color: rgb(121.2769230769, 141.4615384615, 142.7230769231);
+}/*# sourceMappingURL=usersForm.css.map */

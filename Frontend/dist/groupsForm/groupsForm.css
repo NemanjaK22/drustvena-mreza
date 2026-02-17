@@ -139,6 +139,13 @@ body {
 }
 .form-actions .btn-save {
   background-color: #2c3e50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
 }
 .form-actions .btn-save:hover {
   background-color: rgb(25.9032258065, 36.5, 47.0967741935);
@@ -156,4 +163,12 @@ body {
 }
 .form-actions .btn-cancel:hover {
   background-color: rgb(121.2769230769, 141.4615384615, 142.7230769231);
+}
+
+.input-error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 10px;
+  min-height: 1.2rem;
 }/*# sourceMappingURL=groupsForm.css.map */

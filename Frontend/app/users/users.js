@@ -1,7 +1,7 @@
 function initialize() {
   let addBtn = document.querySelector("#addBtn")
   addBtn.addEventListener("click", function () {
-    window.location.href = '../userForm/userForm.html'
+    window.location.href = '../usersForm/usersForm.html'
   })
 
   getAll()
