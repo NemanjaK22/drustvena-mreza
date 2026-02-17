@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5152/api/groups";
+const API_BASE_URL = "http://localhost:17948/api/groups";
 
 function initializeAddGroup() {
   let saveBtn = document.querySelector("#saveGroupBtn");

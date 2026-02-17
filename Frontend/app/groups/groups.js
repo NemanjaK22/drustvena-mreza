@@ -1,5 +1,4 @@
-const API_BASE_URL = "http://localhost:5152/api/groups";
-
+const API_BASE_URL = "http://localhost:17948/api/groups";
 
 function initializeGroups() {
   let addBtn = document.querySelector("#addGroupBtn");
@@ -64,7 +63,11 @@ function renderGroups(data) {
       membersBtn.className = "btn-add";
 
       membersBtn.addEventListener("click", function () {
-        window.location.href = "group-members.html?groupId=" + group.id;
+        window.location.href =
+          "../members/members.html?id=" +
+          group["id"] +
+          "&name=" +
+          group["name"];
       });
 
       cellMembers.appendChild(membersBtn);
