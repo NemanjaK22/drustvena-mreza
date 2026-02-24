@@ -17,7 +17,8 @@
     </nav>
 
     <div class="container">
-      <h2 class="form-title">Create / Edit User</h2>
+      <h2 id="addTitle">Add new user</h2>
+      <h2 id="editTitle">Edit user</h2>
 
       <form id="userForm" class="form-group">
         <input type="hidden" id="userId" />
@@ -30,6 +31,7 @@
           placeholder="Enter username..."
           required
         />
+        <span id="usernameError"></span>
 
         <label for="firstName">First Name:</label>
         <input
@@ -39,6 +41,7 @@
           placeholder="Enter first name..."
           required
         />
+        <span id="firstNameError"></span>
 
         <label for="lastName">Last Name:</label>
         <input
@@ -48,9 +51,11 @@
           placeholder="Enter last name..."
           required
         />
+        <span id="lastNameError"></span>
 
         <label for="dateOfBirth">Date of Birth:</label>
         <input type="date" id="dateOfBirth" name="dateOfBirth" required />
+        <span id="dateOfBirthError"></span>
 
         <div class="form-actions">
           <button type="button" id="saveUserBtn" class="btn-save">

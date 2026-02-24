@@ -124,7 +124,7 @@ body {
   display: none;
 }
 
-.form-title {
+#addTitle, #editTitle {
   text-align: center;
   margin-top: 2rem;
   color: #2c3e50;
