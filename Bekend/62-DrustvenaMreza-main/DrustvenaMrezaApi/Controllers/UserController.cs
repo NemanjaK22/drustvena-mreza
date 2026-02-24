@@ -10,29 +10,46 @@ namespace DrustvenaMrezaApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private UserRepository userRepository = new UserRepository();
-        private UserDbRepository userDbRepository = new UserDbRepository();
+        private UserDbRepository userDbRepository;
+
+        public UserController()
+        {
+            userDbRepository = new UserDbRepository();
+        }
 
 
 
         [HttpGet]
         public ActionResult<List<User>> GetAll()
         {
-            List<User> users = userDbRepository.GetAll();
-            return Ok(users);
+            try
+            {
+                List<User> users = userDbRepository.GetAll();
+                return Ok(users);
+            }
+            catch (Exception)
+            {
+                return Problem("Došlo je do greške prilikom dobavljanja svih korisnika iz baze.");
+            }
         }
 
         [HttpGet("{id}")]
         public ActionResult<User> GetById(int id)
         {
-            User user = userDbRepository.GetById(id);
-            if (user != null)
+            try
             {
+                User user = userDbRepository.GetById(id);
+
+                if (user == null)
+                {
+                    return NotFound($"Korisnik sa ID {id} nije pronađen.");
+                }
+
                 return Ok(user);
             }
-            else
+            catch (Exception)
             {
-                return NotFound($"Korisnik sa ID {id} nije pronađen.");
+                return Problem($"Došlo je do greške prilikom dobavljanja korisnika sa ID {id}.");
             }
         }
 
@@ -44,13 +61,18 @@ namespace DrustvenaMrezaApi.Controllers
                 string.IsNullOrWhiteSpace(newUser.LastName) || 
                 newUser.DateOfBirth == DateTime.MinValue)
             {
-                return BadRequest();
+                return BadRequest("Nisu uneti svi obavezni podaci.");
             }
-            newUser.Id = GetNewId(UserRepository.Data.Keys.ToList());
-            UserRepository.Data[newUser.Id] = newUser;
-            userRepository.SaveUsers();
 
-            return Ok(newUser);
+            try
+            {
+                User createdUser = userDbRepository.Create(newUser);
+                return Ok(createdUser);
+            }
+            catch (Exception)
+            {
+                return Problem("Došlo je do greške prilikom kreiranja korisnika u bazi podataka.");
+            }
         }
 
         [HttpPut("{id}")]
@@ -64,45 +86,37 @@ namespace DrustvenaMrezaApi.Controllers
             {
                 return BadRequest();
             }
-            if (!UserRepository.Data.ContainsKey(id))
+            try
             {
-                return NotFound($"Korisnik sa ID {id} nije pronađen.");
+                User user = userDbRepository.Update(id, updatedUser);
+                if (user == null)
+                {
+                    return NotFound($"Korisnik sa ID {id} nije pronađen.");
+                }
+                return Ok(user);
             }
-            User user = UserRepository.Data[id];
-            user.Username = updatedUser.Username;
-            user.FirstName = updatedUser.FirstName;
-            user.LastName = updatedUser.LastName;
-            user.DateOfBirth = updatedUser.DateOfBirth;
-            userRepository.SaveUsers();
-
-            return Ok(updatedUser);
+            catch (Exception)
+            {
+                return Problem($"Došlo je do greške prilikom ažuriranja korisnika sa ID {id}.");
+            }
         }
 
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            if (!UserRepository.Data.ContainsKey(id))
+            try
             {
-                return NotFound($"Korisnik sa ID {id} nije pronađen.");
-            }
-            UserRepository.Data.Remove(id);
-            userRepository.SaveUsers();
-
-            return NoContent();
-        }
-
-
-        private int GetNewId(List<int> list)
-        {
-            int maxId = 0;
-            foreach (int id in list)
-            {
-                if (id > maxId)
+                bool isDeleted = userDbRepository.Delete(id);
+                if (!isDeleted)
                 {
-                    maxId = id;
+                    return NotFound($"Korisnik sa ID {id} nije pronađen.");
                 }
+                return NoContent();
             }
-            return maxId + 1;
+            catch (Exception)
+            {
+                return Problem($"Došlo je do greške prilikom brisanja korisnika sa ID {id}.");
+            }
         }
     }
 }
