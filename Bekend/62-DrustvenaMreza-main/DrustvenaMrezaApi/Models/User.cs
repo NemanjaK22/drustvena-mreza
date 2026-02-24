@@ -16,5 +16,6 @@
             LastName = lastName;
             DateOfBirth = dateOfBirth;
         }
+        public User() { }
     }
 }

@@ -2,6 +2,7 @@
 using DrustvenaMrezaApi.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.Sqlite;
 
 namespace DrustvenaMrezaApi.Controllers
 {
@@ -11,10 +12,55 @@ namespace DrustvenaMrezaApi.Controllers
     {
         private UserRepository userRepository = new UserRepository();
 
+        private List<User> GetAllFromDatabase()
+        {
+            List<User> users = new List<User>();
+            string connectionString = "Data Source=database/database.db";
+
+            try
+            {
+                using SqliteConnection connection = new SqliteConnection(connectionString);
+                    connection.Open();
+                    string query = "SELECT Id, Username, Name, Surname, Birthday FROM Users";
+                    using SqliteCommand command = new SqliteCommand(query, connection);
+                    using SqliteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    User user = new User
+                    {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Username = reader["Username"].ToString(),
+                        FirstName = reader["Name"].ToString(),
+                        LastName = reader["Surname"].ToString(),
+                        DateOfBirth = Convert.ToDateTime(reader["Birthday"])
+                    };
+                    users.Add(user);
+                }
+            }
+            catch (SqliteException ex)
+            {
+                Console.WriteLine($"Greška pri konekciji ili izvršavanju neispravnih SQL upita: {ex.Message}");
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine($"Greška u konverziji podataka iz baze: {ex.Message}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Konekcija nije otvorena ili je otvorena više puta: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Neočekivana greška: {ex.Message}");
+            }
+            return users;
+        }
+
+
         [HttpGet]
         public ActionResult<List<User>> GetAll()
         {
-            List<User> users = UserRepository.Data.Values.ToList();
+            List<User> users = GetAllFromDatabase();
             return Ok(users);
         }
 
