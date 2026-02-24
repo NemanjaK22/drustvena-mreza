@@ -481,4 +481,8 @@ FodyWeavers.xsd
 # VS Code
 .vscode/
 
+#Ignorisi SQLite bazu podataka
+database/*
+!database/.gitkeep
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,visualstudio,windows,dotnetcore
