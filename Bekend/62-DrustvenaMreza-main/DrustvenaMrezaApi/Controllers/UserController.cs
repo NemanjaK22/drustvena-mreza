@@ -11,65 +11,24 @@ namespace DrustvenaMrezaApi.Controllers
     public class UserController : ControllerBase
     {
         private UserRepository userRepository = new UserRepository();
+        private UserDbRepository userDbRepository = new UserDbRepository();
 
-        private List<User> GetAllFromDatabase()
-        {
-            List<User> users = new List<User>();
-            string connectionString = "Data Source=database/database.db";
-
-            try
-            {
-                using SqliteConnection connection = new SqliteConnection(connectionString);
-                    connection.Open();
-                    string query = "SELECT Id, Username, Name, Surname, Birthday FROM Users";
-                    using SqliteCommand command = new SqliteCommand(query, connection);
-                    using SqliteDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    User user = new User
-                    {
-                        Id = Convert.ToInt32(reader["Id"]),
-                        Username = reader["Username"].ToString(),
-                        FirstName = reader["Name"].ToString(),
-                        LastName = reader["Surname"].ToString(),
-                        DateOfBirth = Convert.ToDateTime(reader["Birthday"])
-                    };
-                    users.Add(user);
-                }
-            }
-            catch (SqliteException ex)
-            {
-                Console.WriteLine($"Greška pri konekciji ili izvršavanju neispravnih SQL upita: {ex.Message}");
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine($"Greška u konverziji podataka iz baze: {ex.Message}");
-            }
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine($"Konekcija nije otvorena ili je otvorena više puta: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Neočekivana greška: {ex.Message}");
-            }
-            return users;
-        }
 
 
         [HttpGet]
         public ActionResult<List<User>> GetAll()
         {
-            List<User> users = GetAllFromDatabase();
+            List<User> users = userDbRepository.GetAll();
             return Ok(users);
         }
 
         [HttpGet("{id}")]
         public ActionResult<User> GetById(int id)
         {
-            if (UserRepository.Data.ContainsKey(id))
+            User user = userDbRepository.GetById(id);
+            if (user != null)
             {
-                return Ok(UserRepository.Data[id]);
+                return Ok(user);
             }
             else
             {
