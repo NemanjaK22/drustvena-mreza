@@ -6,8 +6,13 @@ namespace DrustvenaMrezaApi.Repositories
 {
     public class UserDbRepository
     {
-        private readonly string connectionString = "Data Source=database/database.db";
-        
+        private readonly string connectionString;
+
+        public UserDbRepository(IConfiguration configuration)
+        {
+            connectionString = configuration["ConnectionString:SQLiteConnection"];
+        }
+
         public List<User> GetAll()
         {
             List<User> users = new List<User>();
@@ -140,7 +145,7 @@ namespace DrustvenaMrezaApi.Repositories
                 throw;
             }
         }
-        public User Update(int id, User updatedUser)
+        public User Update(User updatedUser)
         {
             try
             {
@@ -150,7 +155,7 @@ namespace DrustvenaMrezaApi.Repositories
                                  SET Username = @Username, Name = @Name, Surname = @Surname, Birthday = @Birthday
                                   WHERE Id = @Id"; 
                 using SqliteCommand command = new SqliteCommand(query, connection);
-                command.Parameters.AddWithValue("@Id", id);
+                command.Parameters.AddWithValue("@Id", updatedUser.Id);
                 command.Parameters.AddWithValue("@Username", updatedUser.Username);
                 command.Parameters.AddWithValue("@Name", updatedUser.FirstName);
                 command.Parameters.AddWithValue("@Surname", updatedUser.LastName);
@@ -159,7 +164,6 @@ namespace DrustvenaMrezaApi.Repositories
                 int rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
-                    updatedUser.Id = id;
                     return updatedUser;
                 }
                 return null;

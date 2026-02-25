@@ -10,11 +10,11 @@ namespace DrustvenaMrezaApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private UserDbRepository userDbRepository;
+        private readonly UserDbRepository userDbRepository;
 
-        public UserController()
+        public UserController(IConfiguration configuration)
         {
-            userDbRepository = new UserDbRepository();
+            userDbRepository = new UserDbRepository(configuration);
         }
 
 
@@ -88,7 +88,8 @@ namespace DrustvenaMrezaApi.Controllers
             }
             try
             {
-                User user = userDbRepository.Update(id, updatedUser);
+                updatedUser.Id = id;
+                User user = userDbRepository.Update(updatedUser);
                 if (user == null)
                 {
                     return NotFound($"Korisnik sa ID {id} nije pronađen.");
