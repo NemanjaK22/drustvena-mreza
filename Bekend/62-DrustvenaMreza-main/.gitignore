@@ -478,4 +478,10 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+# Ignoriši sve fajlove unutar database foldera (uključujući i tvoju .db bazu)
+database/*
+
+# ALI (!) izuzmi .gitkeep fajl od ignorisanja (kako bi Git zapamtio folder)
+!database/.gitkeep
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,visualstudio,windows,dotnetcore

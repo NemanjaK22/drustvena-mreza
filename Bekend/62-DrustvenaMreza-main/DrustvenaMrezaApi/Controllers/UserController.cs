@@ -20,12 +20,23 @@ namespace DrustvenaMrezaApi.Controllers
 
 
         [HttpGet]
-        public ActionResult<List<User>> GetAll()
+        public ActionResult GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
+            if (page < 1 || pageSize < 1)
+            {
+                return BadRequest("Page i pageSize moraju biti veći od 0.");
+            }
             try
             {
-                List<User> users = userDbRepository.GetAll();
-                return Ok(users);
+                List<User> users = userDbRepository.GetAll(page, pageSize);
+                int totalCount = userDbRepository.CountAll();
+
+                Object result = new
+                {
+                    Data = users,
+                    TotalCount = totalCount
+                };
+                return Ok(result);
             }
             catch (Exception)
             {
