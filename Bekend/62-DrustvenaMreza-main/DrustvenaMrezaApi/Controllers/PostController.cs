@@ -56,5 +56,26 @@ namespace DrustvenaMrezaApi.Controllers
                 return Problem("Doslo je do greske prilikom kreiranja objave: " + ex.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                bool isDeleted = postDbRepository.Delete(id);
+                if (isDeleted)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return NotFound($"Objava sa zadatim ID {id} nije pronađena.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Problem("Doslo je do greske prilikom brisanja objave: " + ex.Message);
+            }
+        }
     }
 }
