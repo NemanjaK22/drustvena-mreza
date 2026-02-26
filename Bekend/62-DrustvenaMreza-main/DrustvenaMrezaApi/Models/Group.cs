@@ -13,5 +13,6 @@
             Name = name;
             CreatedDate = createdDate;
         }
+        public Group() { }
     }
 }

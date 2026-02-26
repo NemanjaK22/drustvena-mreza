@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Eventing.Reader;
 using DrustvenaMrezaApi.Models;
 using DrustvenaMrezaApi.Repositories;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DrustvenaMrezaApi.Controllers
 {
@@ -13,13 +14,35 @@ namespace DrustvenaMrezaApi.Controllers
         private UserRepository userRepository = new UserRepository();
         private GroupMembersRepository membershipRepository = new GroupMembersRepository();
         private GroupRepository groupRepository = new GroupRepository();
+        private readonly GroupDbRepository groupDbRepository;
+
+        public GroupController(IConfiguration configuration)
+        {
+            groupDbRepository = new GroupDbRepository(configuration);
+        }
         //GET api/groups
         [HttpGet]
-        public ActionResult<List<Group>> GetAll()
+        public ActionResult<List<Group>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            List<Group> groups = GroupRepository.Data.Values.ToList();
+            if (page < 1 || pageSize < 1)
+            {
+                return BadRequest("Page i pageSize moraju biti veći od 0.");
+            }
+            try
+            {
+                List<Group> groups = groupDbRepository.GetAll(page, pageSize);
 
-            return Ok(groups);
+                Object result = new
+                {
+                    Data = groups
+                };
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return Problem(detail: ex.ToString(), statusCode: 500);
+            }
+
         }
 
         [HttpPost]
