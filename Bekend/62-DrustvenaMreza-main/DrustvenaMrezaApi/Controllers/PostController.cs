@@ -10,10 +10,12 @@ namespace DrustvenaMrezaApi.Controllers
     public class PostController : ControllerBase
     {
         private readonly PostDbRepository postDbRepository;
+        private readonly UserDbRepository userDbRepository;
 
         public PostController(IConfiguration configuration)
         {
             postDbRepository = new PostDbRepository(configuration);
+            userDbRepository = new UserDbRepository(configuration);
         }
 
         [HttpGet]
@@ -27,6 +29,31 @@ namespace DrustvenaMrezaApi.Controllers
             catch (Exception ex)
             {
                 return Problem("Doslo je do greske prilikom dobavljanja objava: " + ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult<Post> Create([FromBody] Post newPost)
+        {
+            if (string.IsNullOrWhiteSpace(newPost.Content))
+            {
+                return BadRequest("Sadržaj objave ne sme biti prazan.");
+            }
+            if (newPost.Date == DateTime.MinValue)
+            {
+                newPost.Date = DateTime.Now;
+            }
+            try
+            {
+                Post createdPost = postDbRepository.Create(newPost);
+                User author = userDbRepository.GetById(createdPost.UserId);
+                createdPost.Author = author;
+
+                return Ok(createdPost);
+            }
+            catch (Exception ex)
+            {
+                return Problem("Doslo je do greske prilikom kreiranja objave: " + ex.Message);
             }
         }
     }
