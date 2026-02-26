@@ -1,0 +1,33 @@
+﻿using DrustvenaMrezaApi.Models;
+using DrustvenaMrezaApi.Repositories;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace DrustvenaMrezaApi.Controllers
+{
+    [Route("api/posts")]
+    [ApiController]
+    public class PostController : ControllerBase
+    {
+        private readonly PostDbRepository postDbRepository;
+
+        public PostController(IConfiguration configuration)
+        {
+            postDbRepository = new PostDbRepository(configuration);
+        }
+
+        [HttpGet]
+        public ActionResult<List<PostController>> GetAll()
+        {
+            try
+            {
+                List<Post> posts = postDbRepository.GetAll();
+                return Ok(posts);
+            }
+            catch (Exception ex)
+            {
+                return Problem("Doslo je do greske prilikom dobavljanja objava: " + ex.Message);
+            }
+        }
+    }
+}
