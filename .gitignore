@@ -485,4 +485,4 @@ FodyWeavers.xsd
 database/*
 !database/.gitkeep
 
-# End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,visualstudio,windows,dotnetcore
+# End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,visualstudio,windows,dotnetcoreBekend/62-DrustvenaMreza-main/DrustvenaMrezaApi/database/database.db
