@@ -66,43 +66,62 @@ namespace DrustvenaMrezaApi.Controllers
 
 
         [HttpPost]
-        public ActionResult<List<Group>>Create([FromBody] Group newGroup)
+        public ActionResult<List<Group>> Create([FromBody] Group newGroup)
         {
-            if(string.IsNullOrWhiteSpace(newGroup.Name))
+            if (string.IsNullOrWhiteSpace(newGroup.Name))
+            {
+                return BadRequest("Nisu uneti svi obavezni podaci");
+            }
+            try
+            {
+                Group createdGroup = groupDbRepository.Create(newGroup);
+                return Ok(createdGroup);
+            }
+            catch (Exception)
+            {
+                return Problem("Doslo je do greske prilikom kreiranja grupe u bazi podataka");
+            }
+        }
+        [HttpPut("{id}")]
+        public ActionResult<User> Update(int id, [FromBody] Group updatedGroup)
+        {
+            if(string.IsNullOrWhiteSpace(updatedGroup.Name))
             {
                 return BadRequest();
             }
-            newGroup.Id = SracunajNoviId(GroupRepository.Data.Keys.ToList());
-            GroupRepository.Data[newGroup.Id] = newGroup;
-            groupRepository.Save();
-
-            return Ok(newGroup);
-;       }
-        private int SracunajNoviId(List<int> identifikatori)
-        {
-            int maxId = 0;
-            foreach(int id in identifikatori)
+            try
             {
-                if(id > maxId)
+                updatedGroup.Id = id;
+                Group group = groupDbRepository.Update(updatedGroup);
+                if (group == null)
                 {
-                    maxId = id;
+                    return NotFound($"Grupa sa Id {id} nije pronadjena");
                 }
+                return Ok(group);
             }
-            return maxId + 1;
+            catch (Exception)
+            {
+                return Problem($"Doslo je do greske prilikom azuriranja grupe sa ID {id}.");
+            }
         }
 
         //DELETE api/groups/{id}
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            if(!GroupRepository.Data.ContainsKey(id))
+            try
             {
-                return NotFound();
+                bool isDeleted = groupDbRepository.Delete(id);
+                if(!isDeleted)
+                {
+                    return NotFound($"Korisnik sa ID {id} nije pronadjen");
+                }
+                return NoContent();
             }
-            GroupRepository.Data.Remove(id);
-            groupRepository.Save();
-
-            return NoContent();
+            catch(Exception)
+            {
+                return Problem($"Doslo je do greske prilikom brisanja korisnika sa ID {id}.");
+            }
         }
 
     }
