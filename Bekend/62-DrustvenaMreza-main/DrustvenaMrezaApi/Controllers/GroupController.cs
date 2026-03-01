@@ -44,6 +44,26 @@ namespace DrustvenaMrezaApi.Controllers
             }
 
         }
+        [HttpGet("{id}")]
+        public ActionResult<User> GetById(int id)
+        {
+            try
+            {
+                Group group = groupDbRepository.getById(id);
+
+                if (group == null)
+                {
+                    return NotFound($"Grupa sa ID {id} nije pronađena.");
+                }
+
+                return Ok(group);
+            }
+            catch (Exception)
+            {
+                return Problem($"Došlo je do greške prilikom dobavljanja grupe sa ID {id}.");
+            }
+        }
+
 
         [HttpPost]
         public ActionResult<List<Group>>Create([FromBody] Group newGroup)
